@@ -37,7 +37,7 @@ Optional legal fields: `COMPANY_REGISTRATION_NUMBER`, `INFORMATION_OFFICER_NAME`
 
 ## Railway service settings
 
-Connect this repository at its root on branch `main`. Use Railpack, start command
+Connect babekizulu/saerbridge-nile with root directory /server on branch `main`. Use the supplied Dockerfile, start command
 `npm start`, pre-deploy command `npm run release`, and health check `/readyz`.
 The release command applies migrations and inserts missing catalogue/legal rows
 without overwriting administrator edits. Set `ENABLE_TEST_AUTH=false` and
@@ -72,4 +72,6 @@ Production sets `trust proxy = 1` so secure cookies and rate limits see `X-Forwa
 
 ## Google Cloud
 
-Authorised JavaScript origins must include production frontends. Authorised redirect URIs are not used for the GIS ID-token popup flow, but the client ID must match the frontend `VITE_GOOGLE_CLIENT_ID`.
+Authorised JavaScript origins must include production frontends. Authorised redirect URIs are not used for the GIS ID-token popup flow, and the client ID is obtained from the central auth/session response. Include https://nile.saerbridge.com among authorized JavaScript origins.
+
+For the pilot, set NILE_BACKGROUND_ENABLED=true and NILE_RUN_WORKER=true to process durable jobs in the API container and run hourly maintenance. Set TRANSCRIPT_ENCRYPTION_KEY before uploading or seeding, and configure Resend email delivery. Larger deployments can run a separate worker and scheduled maintenance instead. Preserve the production PostgreSQL service and account UUIDs. Take a verified backup before migration; duplicate active emails deliberately stop migration for manual reconciliation.

@@ -157,7 +157,7 @@ export default function Home() {
                 },
                 {
                   title: 'API reference',
-                  text: 'Stable IDs, pagination and methodology metadata.',
+                  text: 'Published aggregates, stable IDs and methodology metadata.',
                   to: '/developers',
                   Icon: Terminal,
                 },

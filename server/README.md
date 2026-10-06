@@ -1,85 +1,27 @@
-# Saerbridge API
+# Saerbridge unified API
 
-Central API, authentication gateway and shared services for **Saerbridge (Pty) Ltd.** (`saerbridge.`).
+Express and PostgreSQL account gateway, extended with Nile's organization-scoped transcript workflow. Central Saerbridge and Nile use the same account UUID and session. Source and Thoth still require the staged adapters described in the launch plan; their existing databases have not been migrated.
 
-This service is the account system for Nile, Andromeda, Percival, Source, Thoth and Alethea. Product applications must not create separate password databases.
+## Run
 
-## Stack
+Copy .env.example to .env, configure an isolated PostgreSQL database, then run npm ci, npm run release and npm start. Never run tests against production: tests reset fixtures. npm test and npm run lint validate the backend.
 
-Node.js, Express, PostgreSQL, server-side sessions, Google Identity Services verification, OpenAI Node SDK (server-only).
+## Authentication
 
-## Local setup
+Google GIS ID tokens are verified server-side. Email sign-in uses expiring, single-use codes delivered through Resend; configure RESEND_API_KEY and verified EMAIL_FROM. Existing Google and email identities require authenticated linking. Production uses api.saerbridge.com, a Secure HttpOnly cookie scoped to .saerbridge.com, exact CLIENT_ORIGINS and CSRF tokens for writes. Preserve existing database, session and CSRF secrets during central migration.
 
-1. Copy `.env.example` to `.env`.
-2. Start PostgreSQL. Docker Compose is provided on ports **5433** (dev) and **5434** (test) so it does not collide with a local Postgres on 5432:
+## Nile
 
-```bash
-docker compose up -d
-```
+Public GET /api/v1/nile/public/archive serves reviewed aggregate releases with public CORS. Organization routes enforce current membership and roles. Only organization researchers upload text. Personal accounts have read-only API access. Organization API keys cannot write or read another organization's findings. Keys expire and are stored as hashes.
 
-Alternatively set `DATABASE_URL` to your own database.
+Transcripts are encrypted with TRANSCRIPT_ENCRYPTION_KEY (32 random bytes, base64). Keep a secure backup; loss makes stored transcripts unreadable. Privacy review and provider permission precede AI processing; human review follows AI. Only approved Saerbridge research can enter public releases, with small-count suppression and a separate publisher review. No organization upload becomes public automatically.
 
-On some Windows Docker Desktop setups, host TCP auth to port 5433 can fail while the container is healthy. If `npm run migrate` reports `28P01`, apply SQL through the container socket (`docker exec -i saerbridge-db psql -U saerbridge -d saerbridge < migrations/001_initial.sql`) or use the Compose test database on **5434**, which the test suite uses successfully.
+## AI and maintenance
 
-3. Install and migrate:
+Set OPENAI_ENABLED=true, a server-only OPENAI_API_KEY and OPENAI_MODEL=gpt-5.4-nano. Run npm run worker, or for a small pilot set NILE_BACKGROUND_ENABLED=true and NILE_RUN_WORKER=true to share the API container. Do not enable both deployment modes unnecessarily. Database job claims remain safe across replicas. Background mode also performs hourly retention maintenance; otherwise schedule npm run maintenance.
 
-```bash
-npm install
-npm run migrate
-npm run seed
-npm run dev
-```
+Org and global monthly reservation budgets, upload limits, input/output caps and zero SDK retries bound usage. These units are conservative token reservations, not a currency billing cap; configure provider spending controls too. The legacy general AI completion endpoint remains disabled.
 
-The API listens on `PORT` (default 8080). Health: `GET /healthz`. Readiness: `GET /readyz`.
+NILE_DEMO_SEED=true explicitly seeds 60 fictional examples across Greenbushes and Walmer during release. Disable after initial deployment. This is synthetic demonstration data, not research.
 
-## Environment
-
-See `.env.example`. Production-critical values:
-
-| Variable | Purpose |
-| --- | --- |
-| `DATABASE_URL` | PostgreSQL connection string |
-| `SESSION_SECRET` | Session HMAC (32+ characters) |
-| `CSRF_SECRET` | CSRF token secret |
-| `GOOGLE_CLIENT_ID` | Google Identity Services client ID |
-| `CLIENT_ORIGINS` | Comma-separated browser origins |
-| `COOKIE_DOMAIN` | Production: `.saerbridge.com` |
-| `ADMIN_EMAILS` | Allowlist used **after** verified Google sign-in |
-| `OPENAI_API_KEY` | Server-only. Never a `VITE_*` variable |
-| `OPENAI_ENABLED` | Feature flag |
-
-Boot fails if production is missing `COOKIE_DOMAIN`, if `ENABLE_TEST_AUTH` is true in production, or if OpenAI is enabled without a key.
-
-## Google OAuth
-
-Create an OAuth client of type **Web** in Google Cloud. Authorised JavaScript origins must include `https://saerbridge.com` and local Vite origins. The ID token is verified on this server with `google-auth-library`. The browser never decides who the user is.
-
-## OpenAI
-
-Install is already declared. Keep `OPENAI_API_KEY` on Railway only. Example integration endpoint: `POST /api/v1/ai/complete` (authenticated, rate-limited, notice recorded). Prompts are not logged unless `OPENAI_DIAGNOSTIC_LOG_PROMPTS=true`.
-
-If an OpenAI key was ever present in a client project or a committed file, **rotate it**.
-
-## Scripts
-
-- `npm run dev` — watch mode
-- `npm start` — production
-- `npm run lint`
-- `npm test`
-- `npm run migrate` / `npm run migrate:rollback`
-- `npm run seed`
-- `npm run maintenance` — prune expired sessions and retained operational rows (safe for a Railway cron)
-
-## Tests
-
-Tests expect `DATABASE_URL` pointing at an empty-able database (Compose service `db_test` on 5434). They enable `ENABLE_TEST_AUTH` only when `NODE_ENV=test`.
-
-## Security notes
-
-- Sessions live in PostgreSQL (`connect-pg-simple`). Cookie `__Secure-saerbridge.sid` in production.
-- CSRF via `csrf-sync` plus Origin allowlisting.
-- CORS is an explicit allowlist with credentials.
-- Parameterised SQL only.
-- Structured logs redact cookies, tokens and API keys.
-
-See `SECURITY.md`, `THREAT_MODEL.md`, `SSO_INTEGRATION.md` and `DEPLOYMENT.md`.
+Read DEPLOYMENT.md, SSO_INTEGRATION.md and ../docs/launch-plan.txt. The implementation is not a claim of ISO certification, complete WCAG conformance or legal compliance.
