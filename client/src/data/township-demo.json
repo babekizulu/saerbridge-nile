@@ -1,0 +1,355 @@
+{
+  "areas": [
+    {
+      "slug": "greenbushes",
+      "name": "Greenbushes",
+      "municipality": "Nelson Mandela Bay",
+      "province": "Eastern Cape",
+      "latitude": -33.92,
+      "longitude": 25.45,
+      "description": "Pilot township research area. Approximate area marker; settlement classification and boundaries await local verification.",
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      }
+    },
+    {
+      "slug": "walmer-township",
+      "name": "Walmer township",
+      "municipality": "Nelson Mandela Bay",
+      "province": "Eastern Cape",
+      "latitude": -33.99,
+      "longitude": 25.58,
+      "description": "Township research pilot in Nelson Mandela Bay. Approximate area marker, never a participant location.",
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      }
+    }
+  ],
+  "themes": [
+    {
+      "slug": "employment",
+      "name": "Reliable employment",
+      "category": "Need",
+      "description": "Interview accounts of reliable employment."
+    },
+    {
+      "slug": "transport",
+      "name": "Affordable transport",
+      "category": "Need",
+      "description": "Interview accounts of affordable transport."
+    },
+    {
+      "slug": "services",
+      "name": "Housing and basic services",
+      "category": "Need",
+      "description": "Interview accounts of housing and basic services."
+    },
+    {
+      "slug": "safety",
+      "name": "Safer public spaces",
+      "category": "Want",
+      "description": "Interview accounts of safer public spaces."
+    },
+    {
+      "slug": "enterprise",
+      "name": "Local enterprise",
+      "category": "Aspiration",
+      "description": "Interview accounts of local enterprise."
+    },
+    {
+      "slug": "community",
+      "name": "Community support",
+      "category": "Asset",
+      "description": "Interview accounts of community support."
+    }
+  ],
+  "findings": [
+    {
+      "id": "greenbushes-employment-2026-10-06",
+      "area": "greenbushes",
+      "theme": "employment",
+      "title": "Reliable employment",
+      "summary": "Synthetic test interviews include accounts of reliable employment. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 18,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "greenbushes-transport-2026-10-06",
+      "area": "greenbushes",
+      "theme": "transport",
+      "title": "Affordable transport",
+      "summary": "Synthetic test interviews include accounts of affordable transport. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 15,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "greenbushes-services-2026-10-06",
+      "area": "greenbushes",
+      "theme": "services",
+      "title": "Housing and basic services",
+      "summary": "Synthetic test interviews include accounts of housing and basic services. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 12,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "greenbushes-safety-2026-10-06",
+      "area": "greenbushes",
+      "theme": "safety",
+      "title": "Safer public spaces",
+      "summary": "Synthetic test interviews include accounts of safer public spaces. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": true,
+        "reason": "MINIMUM_SAMPLE_THRESHOLD",
+        "minimumRequired": 10
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "greenbushes-enterprise-2026-10-06",
+      "area": "greenbushes",
+      "theme": "enterprise",
+      "title": "Local enterprise",
+      "summary": "Synthetic test interviews include accounts of local enterprise. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 15,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "greenbushes-community-2026-10-06",
+      "area": "greenbushes",
+      "theme": "community",
+      "title": "Community support",
+      "summary": "Synthetic test interviews include accounts of community support. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 18,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "walmer-township-employment-2026-10-06",
+      "area": "walmer-township",
+      "theme": "employment",
+      "title": "Reliable employment",
+      "summary": "Synthetic test interviews include accounts of reliable employment. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 18,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "walmer-township-transport-2026-10-06",
+      "area": "walmer-township",
+      "theme": "transport",
+      "title": "Affordable transport",
+      "summary": "Synthetic test interviews include accounts of affordable transport. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 15,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "walmer-township-services-2026-10-06",
+      "area": "walmer-township",
+      "theme": "services",
+      "title": "Housing and basic services",
+      "summary": "Synthetic test interviews include accounts of housing and basic services. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 12,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "walmer-township-safety-2026-10-06",
+      "area": "walmer-township",
+      "theme": "safety",
+      "title": "Safer public spaces",
+      "summary": "Synthetic test interviews include accounts of safer public spaces. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": true,
+        "reason": "MINIMUM_SAMPLE_THRESHOLD",
+        "minimumRequired": 10
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "walmer-township-enterprise-2026-10-06",
+      "area": "walmer-township",
+      "theme": "enterprise",
+      "title": "Local enterprise",
+      "summary": "Synthetic test interviews include accounts of local enterprise. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 15,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    },
+    {
+      "id": "walmer-township-community-2026-10-06",
+      "area": "walmer-township",
+      "theme": "community",
+      "title": "Community support",
+      "summary": "Synthetic test interviews include accounts of community support. These qualitative samples do not estimate township population prevalence.",
+      "measure": {
+        "suppressed": false,
+        "count": 18,
+        "total": 30
+      },
+      "provenance": {
+        "demonstration": true,
+        "wave": "2026-10",
+        "fieldwork": "See source study register",
+        "methodology": "synthetic-fixture-v1",
+        "source": "Synthetic Saerbridge test transcripts",
+        "interviews": 30
+      },
+      "evidence": "Reviewed"
+    }
+  ],
+  "quotes": [],
+  "releases": [
+    {
+      "id": "release-2026-10-06",
+      "title": "Synthetic township pilot",
+      "description": "Aggregate reviewed themes; no transcripts or participant locations.",
+      "date": "2026-10-06",
+      "version": "2026-10-06",
+      "findingIds": [
+        "greenbushes-employment-2026-10-06",
+        "greenbushes-transport-2026-10-06",
+        "greenbushes-services-2026-10-06",
+        "greenbushes-safety-2026-10-06",
+        "greenbushes-enterprise-2026-10-06",
+        "greenbushes-community-2026-10-06",
+        "walmer-township-employment-2026-10-06",
+        "walmer-township-transport-2026-10-06",
+        "walmer-township-services-2026-10-06",
+        "walmer-township-safety-2026-10-06",
+        "walmer-township-enterprise-2026-10-06",
+        "walmer-township-community-2026-10-06"
+      ],
+      "demonstration": true
+    }
+  ]
+}

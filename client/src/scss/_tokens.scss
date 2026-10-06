@@ -1,0 +1,33 @@
+$tablet: 960px;
+$mobile: 640px;
+:root {
+  --cream: #f2efe7;
+  --paper: #fbfaf6;
+  --mint: #c8dfdb;
+  --mint-light: #e9f1ed;
+  --navy: #142f48;
+  --ink: #131313;
+  --muted: #58696c;
+  --line: #d0d9d4;
+  --teal: #438584;
+  --ochre: #947450;
+  --rust: #996d51;
+  --sans: 'Manrope', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --editorial: 'Cormorant Garamond', Georgia, serif;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-10: 5rem;
+  --content-width: 1440px;
+  --page-gutter: 40px;
+  --radius: 2px;
+  --pill: 999px;
+  --border: 1px solid var(--line);
+  --chart-gap: 24px;
+  --motion: 140ms;
+  --z-header: 20;
+  --z-skip: 100;
+}

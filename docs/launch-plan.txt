@@ -1,0 +1,72 @@
+SAERBRIDGE NILE — BUILD DECISIONS, RISKS AND LAUNCH CHECKLIST
+Working decision log • 6 October 2026 • Owner: Saerbridge
+This is an implementation and planning record, not legal advice, certification, or an audit opinion. Items below require owner decisions and professional review where indicated.
+
+1. PRODUCT AND IDENTITY REVIEW
+Netlify shows deployed Saerbridge, Source, Thoth, Andromeda and Aletheia frontends. Railway confirms api.saerbridge.com and its PostgreSQL service are online. The central September/saerbridge/server already defines shared UUIDs, PostgreSQL sessions, Google authentication and a cross-product SSO contract. Nile extends that service in its client/server monorepo rather than introducing another password database. Email sign-in uses expiring single-use codes; Google account linking requires an authenticated existing account when email already exists.
+Thoth currently has its own identity/session/party-membership model. Source documents in-memory state and no persistent account system. September's Andromeda, Aletheia and Percival folders are empty. The Andromeda/Aletheia repository URLs shown by Netlify could not be fetched with current Git credentials (repository not found); this does not establish that the repositories no longer exist. Percival deployment was not found in the reviewed Netlify inventory.
+Migration: inventory existing user IDs and duplicate verified emails; back up and restore-test databases; create explicit legacy_user_links(product, legacy_id, saerbridge_uuid); require proof of both identities before linking; stage each product adapter against central auth/session and CSRF; retain product permissions and data separation; run compatibility tests; cut over one product at a time with rollback. Do not merge political-party data or other product data into Nile research merely because identities match. Existing production products have not been silently migrated.
+
+2. NILE DATA BOUNDARIES
+Public: released Saerbridge aggregates only. No raw transcripts, identifying quotations, or participant locations. Anonymous read API supports other browser origins without credentials. Personal accounts can use the dashboard and API; upload endpoints require organization membership. Organization owners can add registered members as researchers or viewers. Organization uploads and results remain private to that organization; read-only organization keys are tenant-scoped, hashed in storage, revocable and expire after 90 days.
+Text only: paste or UTF-8 .txt, maximum 40,000 characters. Every upload carries a provenance/consent reference and authority attestation. These attestations do not prove authenticity. Research staff must verify the source register, interviewer authority, dates, consent scope, duplicate status and withdrawal rights. Real research needs an approved study protocol and participant register held separately with restricted access.
+Workflow: uploaded -> privacy review -> queued -> AI processing -> analysis review -> approved/rejected. Privacy review confirms de-identification and provider-processing authority. AI excerpts must appear exactly in the reviewed text. Public Saerbridge research requires an evidence reviewer different from its uploader and a separate administrator publication action. Counts and complements below ten are suppressed. This threshold alone does not guarantee anonymity; assess linkage, repeated releases and differencing attacks.
+Pilot: only Greenbushes and Walmer township. 30 fictional transcripts each. All fictional data and exports must remain visibly labelled; synthetic seed authors are disabled accounts. Countrywide map extent does not imply nationwide research coverage. Markers are approximate. Greenbushes' settlement classification and both study boundaries need local verification before actual research claims.
+
+3. AI COST AND QUALITY PLAN
+Server-side structured extraction with a configurable small model (initial gpt-5.4-nano), no tools, no open-ended agent loops, bounded input and output, store:false, transcript deduplication, durable jobs, and per-organization budget reservations. No automatic provider retry after an uncertain outcome. Human approval is required. A provider response is not validation of truth or consent.
+Before real data: approve the AI processor/DPA, region and cross-border safeguards; verify retention and any available zero-data-retention arrangements. store:false is not a guarantee of zero provider retention. Set provider-project spend limits, global service budgets and alerts, worker concurrency, per-tenant quotas and realistic unit-cost estimates. Evaluate theme accuracy, missed evidence, harmful inferences and language performance on reviewed isiXhosa, English and other relevant language samples; compare against human coding. Do not infer sensitive traits or use outputs for decisions about individuals. Batch processing can be considered after privacy review when latency permits; it requires separate retention and lifecycle assessment.
+
+4. SUBSCRIPTION INTEGRATION PROPOSAL — NO PAYMENTS ACTIVATED
+Free public: public dashboard, downloads and rate-limited public API. Keep publicly funded/public-interest Saerbridge evidence accessible.
+Organization pilot: private workspace, a small number of seats, fixed monthly transcript/character allowance, read-only private API, retention controls, email support. Hard stop at quota; no surprise overage billing.
+Organization team: more seats and pooled monthly analysis allowance, higher API allowance, export/audit support. Price after measuring AI tokens, database/storage, email, support and review costs. Human review is likely a larger cost than small-model extraction.
+Enterprise/research agreements: negotiated data location, retention, procurement/security requirements, service objectives and invoicing; avoid promising certifications that have not been achieved.
+Implementation: central billing_customers, subscriptions, product_entitlements and append-only usage_ledger linked to organization UUID, not email. Choose a South Africa-supported PSP after assessing ZAR recurring payments, payouts, VAT invoices, refunds, chargebacks and PCI scope. Use hosted checkout; never store card details. Verify webhook signatures, persist event IDs, handle duplicates/out-of-order events, reconcile provider state and test cancellation, grace periods, failed payments, plan downgrades and prorations. Enforce entitlements server-side before reserving AI usage. Keep API rate limits distinct from billable usage. Add customer billing portal, transparent quotas and downloadable invoices. No price or provider selection is final in this draft.
+
+5. LEGAL AND BUSINESS CHECKLIST FOR THE SEPARATE TASK
+[ ] Confirm contracting entity, CIPC registration, registered address, beneficial ownership obligations and authorized signatory with business advisers.
+[ ] Confirm SARS tax registrations, VAT applicability and invoicing/accounting treatment with an accountant; do not use an unverified threshold.
+[ ] Appoint and register the Information Officer/deputies as applicable; verify Information Regulator eServices requirements.
+[ ] Assess POPIA responsible-party/operator roles separately for public Saerbridge research and customer organization research. Document purpose, lawful basis, minimality, data categories, recipients, retention and cross-border transfers.
+[ ] Complete privacy/AI impact and security risk assessments, including township-level stigma, special personal information, children, vulnerable participants, indirect identifiers and linkage attacks.
+[ ] Prepare a PAIA manual and access-request process where applicable; confirm annual reporting duties and exemptions with counsel.
+[ ] Draft privacy notice, participant information sheet and consent/withdrawal forms in appropriate languages; separate participation, AI processing and public quotation/publication permissions.
+[ ] Draft organization service agreement, DPA/operator terms, confidentiality and researcher-access rules, subprocessors schedule and cross-border safeguards.
+[ ] Draft account/API terms and acceptable use, public dataset licence, citation/provenance requirements, prohibited re-identification and complaint/correction procedures. Choose code and data licences separately; assess contributor rights and dependency/map attribution.
+[ ] Review ECTA supplier disclosures/electronic contracting and CPA marketing, cancellation, renewals, refunds and fair terms before paid subscriptions. Counsel must assess scope and exceptions.
+[ ] Draft retention/deletion schedule, participant withdrawal workflow, backup expiry and incident response plan. Security-compromise notifications should follow current Information Regulator guidance and reporting channels, not an invented universal deadline.
+[ ] Approve research ethics/community engagement procedures and any required institutional ethics review; validate study geography and sampling claims locally.
+[ ] Confirm provider contracts, data locations, subcontractors and support access for Railway, Netlify, Google, email and AI services. Configure domain/DNS ownership, monitoring, backups and restoration responsibilities.
+[ ] Establish support and complaints ownership, security contact, incident escalation, staff training, supplier review, business continuity and insurance/procurement requirements.
+[ ] Only then approve subscription pricing, terms, payment provider, recurring-charge consent and launch communications.
+
+6. STANDARDS AND EVIDENCE — NOT CERTIFIED
+Target WCAG 2.2 AA with keyboard paths, labelled controls, visible focus, responsive layout, text alternatives to map/chart information, accessible errors and reduced motion. Automated checks and spot checks are evidence, not a complete accessibility conformance audit. Test screen readers, zoom/reflow, contrast and all authenticated workflows with users.
+Assess applicability of ISO/IEC 27001:2022 (security management), ISO/IEC 27701:2025 (privacy management), ISO/IEC 42001:2023 (AI management), and ISO/IEC 23894:2023 (AI risk guidance). ISO/IEC 27017/27018, ISO 22301 and ISO 9001 may be useful depending on contracts and scope. These are not automatically all mandatory. Buy/obtain authorized standards, define scope and responsibilities, maintain risk treatment/statement of applicability, operate controls, perform internal audits and management review, then commission accredited certification if justified. No claim of ISO compliance/certification should appear in marketing from this code build alone.
+Security verification should include OWASP ASVS-oriented testing, independent penetration testing, threat modelling, least-privilege runtime database roles, administrative MFA, secrets/key rotation and recovery, secure backups, alerting and incident drills. An application-level tenant check is not database row-level security; decide whether to add RLS before high-sensitivity workloads.
+
+7. SERIOUS CONCERNS / OPEN LAUNCH ITEMS
+HIGH — Shared identity migration affects existing users. Preserve central IDs and sessions; resolve duplicate emails rather than guessing account ownership. Thoth/Source migrations remain separate staged changes.
+HIGH — Production configuration and end-to-end delivery still need verification: OAuth authorized origins, verified sending domain, stable encryption key, database and worker services, backups, domain routing, HTTPS/cookie behavior, provider budget and smoke tests. Local mocked-provider tests are not evidence that real email/Google/AI works in production.
+HIGH — Real-data launch needs approved consent/protocols, privacy and AI impact assessments, administrative MFA and independent security/privacy review. The system cannot certify uploaded narratives as truthful.
+HIGH — Single encryption key protects stored transcript text; key compromise or loss has broad impact. Production needs a secrets manager, restricted access, rotation/version strategy and tested recovery. Tenant-scoped encryption can follow as requirements mature.
+MEDIUM — Published aggregates may enable differencing across versions. Review publication granularity, withdrawal and repeated-release policy. Suppression is only one control.
+MEDIUM — OpenStreetMap's public tile service is best-effort and has a usage policy. Preserve attribution/referrer/caching; no bulk download/offline prefetch. Assess a supported tile provider before significant traffic.
+MEDIUM — Greenbushes classification and pilot boundaries are unverified; two approximate pilot markers are not a national township gazetteer.
+MEDIUM — Andromeda/Aletheia deployed source could not be fetched with current Git access, so their authentication/security compatibility is unverified. Railway inventory showed unrelated crashed services; identify their owners before any intervention.
+PENDING — Anne (dot) recipient has not yet been uniquely identified. Once identified, hand off this checklist and request draft documents in Google Docs for a separate legal/business review task; do not publish or accept agreements.
+
+8. SOURCES CHECKED 6 OCTOBER 2026
+Information Regulator POPIA and Information Officer guidance: https://inforegulator.org.za/popia/
+Information Regulator security compromise factsheet: https://inforegulator.org.za/2025/08/19/fact-sheet-handling-of-security-compromises/
+Information Regulator eServices: https://eservices.inforegulator.org.za/services.aspx
+ECTA: https://www.gov.za/documents/electronic-communications-and-transactions-act
+CPA: https://www.gov.za/documents/consumer-protection-act
+WCAG 2.2: https://www.w3.org/TR/WCAG22/
+ISO/IEC 27001: https://www.iso.org/standard/27001
+ISO/IEC 27701: https://www.iso.org/standard/27701
+ISO AI standards: https://www.iso.org/sectors/it-technologies/ai
+OpenAI structured output: https://developers.openai.com/api/docs/guides/structured-outputs
+OpenAI model: https://developers.openai.com/api/docs/models/gpt-5.4-nano
+OSM tile policy: https://operations.osmfoundation.org/policies/tiles/
