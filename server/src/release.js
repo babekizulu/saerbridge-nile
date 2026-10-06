@@ -11,6 +11,6 @@ async function release() {
     const pool = createPool(process.env.DATABASE_URL);
     try { await seedDemo(pool); } finally { await closePool(pool); }
   }
-  console.log("Release migrations and requested seed completed");
+  process.stdout.write("Release migrations and requested seed completed\n");
 }
 release().catch((error) => { console.error("Release failed:", error.code || error.name); process.exitCode = 1; });

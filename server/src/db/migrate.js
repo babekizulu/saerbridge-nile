@@ -33,6 +33,8 @@ async function migrateUp(databaseUrl = process.env.DATABASE_URL) {
   let client;
   try {
     client = await pool.connect();
+    // Serialize all migration runners, including first-time schema creation.
+    await client.query("SELECT pg_advisory_lock(193576, 20261006)");
     await ensureMigrationsTable(client);
     const applied = new Set(await appliedMigrations(client));
     const files = await listUpMigrations();
@@ -53,6 +55,7 @@ async function migrateUp(databaseUrl = process.env.DATABASE_URL) {
     }
     return ran;
   } finally {
+    if (client) await client.query("SELECT pg_advisory_unlock(193576, 20261006)").catch(() => {});
     client?.release();
     await closePool(pool);
   }
@@ -64,6 +67,7 @@ async function migrateDown(databaseUrl = process.env.DATABASE_URL) {
   let client;
   try {
     client = await pool.connect();
+    await client.query("SELECT pg_advisory_lock(193576, 20261006)");
     await ensureMigrationsTable(client);
     const applied = await appliedMigrations(client);
     const latest = applied.at(-1);
@@ -82,6 +86,7 @@ async function migrateDown(databaseUrl = process.env.DATABASE_URL) {
     }
     return [latest];
   } finally {
+    if (client) await client.query("SELECT pg_advisory_unlock(193576, 20261006)").catch(() => {});
     client?.release();
     await closePool(pool);
   }
